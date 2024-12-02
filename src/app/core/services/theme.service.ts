@@ -1,12 +1,12 @@
 import { Injectable, signal } from '@angular/core';
 import { effect } from '@angular/core';
-import { Theme } from '../../../shared/models/common.types';
+import { ITheme } from '../../shared/models/common.types';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ThemeService {
-  public theme = signal<Theme>({ mode: 'dark', color: 'base' });
+  public theme = signal<ITheme>({ mode: 'dark', color: 'base' });
 
   constructor() {
     this.loadTheme();

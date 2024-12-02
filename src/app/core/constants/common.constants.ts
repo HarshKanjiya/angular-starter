@@ -13,3 +13,13 @@ export const Operator = {
   IsNull: 'is_null',        // Null check (IS NULL)
   IsNotNull: 'is_not_null' // Not null check (IS NOT NULL)
 };
+
+export const ErrorMessages: Record<number | string, string> = {
+  400: 'Bad Request: Please check the input data.',
+  401: 'Unauthorized: Authentication is required.',
+  403: 'Forbidden: You do not have access.',
+  404: 'Not Found: The requested resource is unavailable.',
+  405: 'Method Not Allowed: The HTTP method is not supported.',
+  500: 'Internal Server Error: Please try again later.',
+  'UNKNOWN_ERROR': 'An unknown error occurred.',
+};

@@ -1,17 +1,45 @@
 import { Injectable } from '@angular/core';
+import { catchError, map, Observable, of } from 'rxjs';
+import { apiService } from './api.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor() { }
+  constructor(private _apiService: apiService, private _router: Router) { }
 
   isLoggedIn(): boolean {
-    const token = localStorage.getItem('authToken');  // Check for token or user data
-    return !!token;  // Returns true if token exists, otherwise false
+    const token = localStorage.getItem('authToken');
+    return !!token;
+  }
+
+  public getToken(): string | null {
+    const token = localStorage.getItem('authToken');
+    return token || null;
   }
 
   logout() {
     localStorage.removeItem('authToken');
   }
+
+  validateToken(): Observable<boolean> {
+    const token = this.getToken();
+    if (!token) return of(false);
+    return this._apiService.post("/api/", { token: token }).pipe(map((response: any) => response.valid), catchError(() => of(false))
+    );
+  }
+
+  redirectToLogin(): void {
+    this._router.navigate(['/login']);
+  }
+}
+
+export function appInitializer(authService: AuthService) {
+  return () => authService.validateToken().toPromise().then(isAuthenticated => {
+    if (!isAuthenticated) {
+      // Redirect to login page if not authenticated
+      authService.redirectToLogin();
+    }
+  });
 }
