@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-unauthorized',
-  standalone: true,
-  imports: [],
-  templateUrl: './unauthorized.component.html',
-  styleUrl: './unauthorized.component.sass'
+    selector: 'app-unauthorized',
+    imports: [],
+    templateUrl: './unauthorized.component.html',
+    styleUrl: './unauthorized.component.sass'
 })
 export class UnauthorizedComponent {
 

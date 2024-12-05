@@ -23,3 +23,8 @@ export const ErrorMessages: Record<number | string, string> = {
   500: 'Internal Server Error: Please try again later.',
   'UNKNOWN_ERROR': 'An unknown error occurred.',
 };
+
+
+export enum NotifycationTypes {
+  Success, Error, Warning, Info
+}

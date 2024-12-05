@@ -34,12 +34,3 @@ export class AuthService {
     this._router.navigate(['/login']);
   }
 }
-
-export function appInitializer(authService: AuthService) {
-  return () => authService.validateToken().toPromise().then(isAuthenticated => {
-    if (!isAuthenticated) {
-      // Redirect to login page if not authenticated
-      authService.redirectToLogin();
-    }
-  });
-}
